@@ -1,5 +1,106 @@
-import React, { useState, useEffect } from 'react';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NA Steps App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+          font-family: 'Inter', sans-serif;
+        }
+        .animate-fadeIn {
+          animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Styles for injected HTML step content */
+        .step-html-content .card {
+            background-color: #ffffff;
+            border-radius: 0.75rem; /* 12px */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            margin-bottom: 1.5rem; /* 24px */
+            overflow: hidden; /* To contain border radius of header */
+        }
+        .step-html-content .card-header {
+            background-color: #7dd3fc; /* Lighter sky blue for card headers */
+            color: #0c4a6e; /* Darker sky blue text */
+            padding: 1rem 1.5rem; /* 16px 24px */
+            border-bottom: 1px solid #bae6fd; /* Even lighter border */
+        }
+        .step-html-content .card-content {
+            padding: 1.5rem; /* 24px */
+            color: #374151; /* Gray 700 */
+        }
+        .step-html-content .card-content ul {
+            list-style-type: disc;
+            padding-left: 1.5rem; /* 24px */
+            margin-top: 0.5rem; /* 8px */
+        }
+        .step-html-content .card-content li {
+            margin-bottom: 0.5rem; /* 8px */
+        }
+        .step-html-content .highlight {
+            color: #0369a1; /* Sky blue 700 */
+            font-weight: 600;
+        }
+        .step-html-content .emphasis {
+            font-style: italic;
+            color: #0ea5e9; /* Sky blue 500 */
+        }
+        .step-html-content .key-themes-card {
+            background-color: #f0f9ff; /* Very light blue, almost white */
+            border: 2px solid #7dd3fc;
+        }
+        .step-html-content .key-themes-header { /* This is a .card-header inside .key-themes-card */
+            background-color: #38bdf8 !important; /* Sky blue 400 - !important to ensure override if needed */
+            color: white !important;
+        }
+        .step-html-content .key-themes-card .card-header h3 { /* Ensure text color is white for key themes header */
+             color: white !important;
+        }
+         .step-html-content .key-themes-card .text-sky-700 { /* Titles within key themes card */
+            color: #0369a1; /* Sky blue 700, consistent with highlight */
+        }
 
+
+        /* General prose styles for other pages */
+        .prose h3 {
+          font-size: 1.5em; /* 24px */
+          font-weight: 600;
+          margin-top: 1.5em;
+          margin-bottom: 0.75em;
+          color: #0c4a6e; /* sky-800 */
+        }
+        .prose p {
+          margin-bottom: 1em;
+          line-height: 1.6;
+        }
+        .prose ol {
+          list-style-type: decimal;
+          margin-left: 1.5em;
+          margin-bottom: 1em;
+        }
+        .prose ol li {
+          margin-bottom: 0.5em;
+        }
+        .line-clamp-3 {
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;  
+          overflow: hidden;
+        }
+    </style>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
 // --- HTML Content for Each Step ---
 const step1HtmlContent = `
 <div class="max-w-6xl mx-auto">
@@ -86,7 +187,7 @@ const step1HtmlContent = `
                 </div>
             </div>
             <p class="mt-6 text-center text-lg font-medium text-sky-800">
-                Step One is the courageous first act of turning towards recovery. Without a complete and honest First Step, the rest of the program may have little foundation upon which to build.
+                Step One is the courageous first act of turning towards recovery. Without acomplete and honest First Step, the rest of the program may have little foundation upon which to build.
             </p>
         </div>
     </div>
@@ -1246,7 +1347,7 @@ const Navbar = ({ setCurrentPage, isMobileMenuOpen, toggleMobileMenu }) => {
   const activeLinkClasses = "bg-sky-900 text-white";
   const inactiveLinkClasses = "text-sky-100";
 
-  const [isStepsOpen, setIsStepsOpen] = useState(false);
+  const [isStepsOpen, setIsStepsOpen] = React.useState(false);
 
   const navLinks = [
     { name: "Home", page: "home" },
@@ -1499,10 +1600,10 @@ const GeneralPage = ({ pageKey }) => {
 
 // --- Main App Component ---
 const App = () => {
-  const [currentPage, setCurrentPage] = useState('home');
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [currentPage, setCurrentPage] = React.useState('home');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash.replace(/^#\/?|\/$/g, ''); 
       if (hash.startsWith('step/')) {
@@ -1558,97 +1659,11 @@ const App = () => {
       <main>
         {pageContent}
       </main>
-      <style jsx global>{`
-        body {
-          font-family: 'Inter', sans-serif;
-        }
-        .animate-fadeIn {
-          animation: fadeIn 0.5s ease-in-out;
-        }
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(10px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        
-        /* Styles for injected HTML step content */
-        .step-html-content .card {
-            background-color: #ffffff;
-            border-radius: 0.75rem; /* 12px */
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            margin-bottom: 1.5rem; /* 24px */
-            overflow: hidden; /* To contain border radius of header */
-        }
-        .step-html-content .card-header {
-            background-color: #7dd3fc; /* Lighter sky blue for card headers */
-            color: #0c4a6e; /* Darker sky blue text */
-            padding: 1rem 1.5rem; /* 16px 24px */
-            border-bottom: 1px solid #bae6fd; /* Even lighter border */
-        }
-        .step-html-content .card-content {
-            padding: 1.5rem; /* 24px */
-            color: #374151; /* Gray 700 */
-        }
-        .step-html-content .card-content ul {
-            list-style-type: disc;
-            padding-left: 1.5rem; /* 24px */
-            margin-top: 0.5rem; /* 8px */
-        }
-        .step-html-content .card-content li {
-            margin-bottom: 0.5rem; /* 8px */
-        }
-        .step-html-content .highlight {
-            color: #0369a1; /* Sky blue 700 */
-            font-weight: 600;
-        }
-        .step-html-content .emphasis {
-            font-style: italic;
-            color: #0ea5e9; /* Sky blue 500 */
-        }
-        .step-html-content .key-themes-card {
-            background-color: #f0f9ff; /* Very light blue, almost white */
-            border: 2px solid #7dd3fc;
-        }
-        .step-html-content .key-themes-header { /* This is a .card-header inside .key-themes-card */
-            background-color: #38bdf8 !important; /* Sky blue 400 - !important to ensure override if needed */
-            color: white !important;
-        }
-        .step-html-content .key-themes-card .card-header h3 { /* Ensure text color is white for key themes header */
-             color: white !important;
-        }
-         .step-html-content .key-themes-card .text-sky-700 { /* Titles within key themes card */
-            color: #0369a1; /* Sky blue 700, consistent with highlight */
-        }
-
-
-        /* General prose styles for other pages */
-        .prose h3 {
-          font-size: 1.5em; /* 24px */
-          font-weight: 600;
-          margin-top: 1.5em;
-          margin-bottom: 0.75em;
-          color: #0c4a6e; /* sky-800 */
-        }
-        .prose p {
-          margin-bottom: 1em;
-          line-height: 1.6;
-        }
-        .prose ol {
-          list-style-type: decimal;
-          margin-left: 1.5em;
-          margin-bottom: 1em;
-        }
-        .prose ol li {
-          margin-bottom: 0.5em;
-        }
-        .line-clamp-3 {
-          display: -webkit-box;
-          -webkit-line-clamp: 3;
-          -webkit-box-orient: vertical;  
-          overflow: hidden;
-        }
-      `}</style>
     </div>
   );
 };
 
-export default App;
+ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
